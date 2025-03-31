@@ -6,6 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { TimeCapsuleMessage } from '@/lib/types';
+import { Dice } from 'lucide-react';
+import { messageIdeas } from '@/lib/messageIdeas';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface MessageFormProps {
   message: TimeCapsuleMessage;
@@ -17,6 +20,11 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onNext();
+  };
+
+  const getRandomMessageIdea = () => {
+    const randomIndex = Math.floor(Math.random() * messageIdeas.length);
+    setMessage({ ...message, message: messageIdeas[randomIndex] });
   };
 
   return (
@@ -51,7 +59,26 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="message">Your Message</Label>
+              <div className="flex justify-between items-center">
+                <Label htmlFor="message">Your Message</Label>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={getRandomMessageIdea} 
+                      type="button" 
+                      className="h-8 w-8 p-0"
+                    >
+                      <Dice className="h-4 w-4" />
+                      <span className="sr-only">Get a random message idea</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Get a random message idea</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
               <Textarea
                 id="message"
                 placeholder="Dear future self...."
