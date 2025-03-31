@@ -54,7 +54,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
               <Label htmlFor="message">Your Message</Label>
               <Textarea
                 id="message"
-                placeholder="Write a message to your future self..."
+                placeholder="Dear future self...."
                 rows={8}
                 value={message.message}
                 onChange={(e) => setMessage({ ...message, message: e.target.value })}
