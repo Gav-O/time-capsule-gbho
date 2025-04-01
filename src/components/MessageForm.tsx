@@ -57,9 +57,20 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
                 required
               />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 relative">
               <div className="flex justify-between items-center">
                 <Label htmlFor="message">Your Message</Label>
+              </div>
+              <div className="relative">
+                <Textarea
+                  id="message"
+                  placeholder="Dear future self...."
+                  rows={8}
+                  value={message.message}
+                  onChange={(e) => setMessage({ ...message, message: e.target.value })}
+                  required
+                  className="resize-none pr-12"
+                />
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button 
@@ -67,9 +78,9 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
                       size="sm" 
                       onClick={getRandomMessageIdea} 
                       type="button" 
-                      className="h-8 w-8 p-0"
+                      className="absolute bottom-2 right-2 h-8 w-8 p-0 hover:bg-accent"
                     >
-                      <Dice1 className="h-4 w-4" />
+                      <Dice1 className="h-5 w-5 text-muted-foreground hover:text-foreground" />
                       <span className="sr-only">Get a random message idea</span>
                     </Button>
                   </TooltipTrigger>
@@ -78,15 +89,6 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <Textarea
-                id="message"
-                placeholder="Dear future self...."
-                rows={8}
-                value={message.message}
-                onChange={(e) => setMessage({ ...message, message: e.target.value })}
-                required
-                className="resize-none"
-              />
             </div>
             <Button type="submit" className="w-full">Continue to select date</Button>
           </form>
