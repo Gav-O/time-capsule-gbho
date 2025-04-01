@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -6,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { TimeCapsuleMessage } from '@/lib/types';
-import { Dice } from 'lucide-react';
+import { Dice1 } from 'lucide-react';
 import { messageIdeas } from '@/lib/messageIdeas';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -70,7 +69,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
                       type="button" 
                       className="h-8 w-8 p-0"
                     >
-                      <Dice className="h-4 w-4" />
+                      <Dice1 className="h-4 w-4" />
                       <span className="sr-only">Get a random message idea</span>
                     </Button>
                   </TooltipTrigger>
