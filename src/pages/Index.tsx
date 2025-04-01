@@ -8,6 +8,7 @@ import PreviewMessage from '@/components/PreviewMessage';
 import SuccessScreen from '@/components/SuccessScreen';
 import { Step, TimeCapsuleMessage } from '@/lib/types';
 import { useToast } from '@/components/ui/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const initialMessage: TimeCapsuleMessage = {
   message: '',
@@ -21,6 +22,7 @@ const Index: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<Step>('compose');
   const [message, setMessage] = useState<TimeCapsuleMessage>(initialMessage);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   const handleNext = () => {
     if (currentStep === 'compose') {
@@ -76,7 +78,7 @@ const Index: React.FC = () => {
     <div className="min-h-screen flex flex-col gradient-bg">
       <Header />
       
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-8 md:py-12">
+      <main className={`flex-1 w-full max-w-7xl mx-auto px-4 py-4 ${isMobile ? 'flex items-center justify-center' : 'py-8 md:py-12'}`}>
         {currentStep === 'compose' && (
           <MessageForm 
             message={message} 

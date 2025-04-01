@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -8,6 +9,7 @@ import { TimeCapsuleMessage } from '@/lib/types';
 import { Dice1 } from 'lucide-react';
 import { messageIdeas } from '@/lib/messageIdeas';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface MessageFormProps {
   message: TimeCapsuleMessage;
@@ -16,6 +18,8 @@ interface MessageFormProps {
 }
 
 const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }) => {
+  const isMobile = useIsMobile();
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onNext();
@@ -27,15 +31,15 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto animate-fade-in">
-      <Card className="time-capsule-card">
-        <CardHeader>
+    <div className="w-full h-full max-w-3xl mx-auto animate-fade-in flex items-center justify-center py-4">
+      <Card className={`time-capsule-card w-full ${isMobile ? 'h-full' : ''}`}>
+        <CardHeader className={`${isMobile ? 'p-4' : 'p-6'}`}>
           <CardTitle className="text-2xl md:text-3xl font-serif">Write to your future self</CardTitle>
           <CardDescription>
             Compose a message that will be delivered to you on a future date
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className={`${isMobile ? 'p-4' : 'p-6 pt-0'}`}>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="senderName">Your Name</Label>
@@ -65,7 +69,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ message, setMessage, onNext }
                 <Textarea
                   id="message"
                   placeholder="Dear future self...."
-                  rows={8}
+                  rows={isMobile ? 6 : 8}
                   value={message.message}
                   onChange={(e) => setMessage({ ...message, message: e.target.value })}
                   required

@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ className }) => {
   return (
-    <header className={cn("w-full py-6 px-4 flex justify-center items-center", className)}>
+    <header className={cn("w-full py-8 px-6 md:px-8 flex justify-center items-center", className)}>
       <div className="flex items-center gap-3">
         <Clock className="h-8 w-8 text-primary" />
         <div>
